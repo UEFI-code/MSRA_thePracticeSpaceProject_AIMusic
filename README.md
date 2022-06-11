@@ -14,9 +14,11 @@ Midi To Tensor: Considering use Miditoolkit
 
 ### Model Designing
 
+Question: Do Accompaniment Needs Remember Privous things?
+
 1. Embeding Layer
 
-2. CNN / LSTM / Transformer
+2. CNN + GLU / LSTM / Transformer
 
 3. Linear
 
