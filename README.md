@@ -8,6 +8,10 @@ This is a Midi Accompaniment project.
 
 Considering to use Midi-Miner to seperate a Midi file to "input" and "target".
 
+### Data Preprocess
+
+Midi To Tensor: Considering use Miditoolkit
+
 ### Model Designing
 
 1. Embeding Layer
@@ -17,3 +21,7 @@ Considering to use Midi-Miner to seperate a Midi file to "input" and "target".
 3. Linear
 
 4. Softmax
+
+## Reference
+
+https://arxiv.org/pdf/2008.07703.pdf
