@@ -3,3 +3,9 @@
 This is a Midi Accompaniment project.
 
 ## Research
+
+### Dataset Making
+
+Considering to use Midi-Miner to seperate a Midi file to "input" and "target".
+
+### Model Designing
