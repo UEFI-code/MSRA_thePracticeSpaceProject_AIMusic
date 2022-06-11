@@ -28,8 +28,6 @@ class MidiCNN(torch.nn.Module):
         x = self.li1(x)
         x = self.relu(x)
         x = self.li2(x)
-        x = self.relu(x)
-        x = self.li3(x)
 
 
 
