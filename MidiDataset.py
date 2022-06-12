@@ -26,6 +26,19 @@ class midiData():
                     NoteSet[len(NoteSet)-1][t+1] = i.velocity
                     t = t + 2
         return NoteSet
+    
+    def DataClean(self):
+        for i in range(len(self.midiPath)):
+            try:
+                testResult = self.ReadMidi(i)
+                if len(testResult) < 8:
+                    #os.remove(self.midiPath[i])
+                    self.midiPath.pop(i)
+                    print('kill ' + self.midiPath[i])
+            except:
+                    #os.remove(self.midiPath[i])
+                    self.midiPath.pop(i)
+                    print('kill ' + self.midiPath[i])
 
     def MakeBatch(self, batchID):
         myBatch = []
@@ -35,6 +48,7 @@ class midiData():
         return myBatch
 
 
-Dataset = midiData('/hdd2/lmd/0/', 5)
+Dataset = midiData('/hdd2/lmd/0', 5)
+#Dataset.DataClean() Don't Try this!
 sample = Dataset.MakeBatch(0)
 print(sample)
