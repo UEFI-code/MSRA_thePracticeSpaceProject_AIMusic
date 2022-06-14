@@ -6,7 +6,7 @@ This is a Midi Accompaniment project.
 
 ### Dataset Making
 
-Considering to use [Midi-Miner](https://github.com/ruiguo-bio/midi-miner) to seperate a Midi file to "input" and "target".
+Considering to use [Midi-Miner-Specfic](https://github.com/UEFI-code/midi-miner-specifc) to seperate a Midi file to "input" and "target".
 
 ### Data Preprocess
 
