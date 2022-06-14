@@ -37,25 +37,28 @@ class midiData():
         return NoteSet
     
     def DataClean(self):
+        killed = 0
         for i in range(len(self.MelodyPath)):
             try:
-                testResultM = self.ReadMidi('M', i)
-                testResultB = self.ReadMidi('B', i)
+                testResultM = self.ReadMidi('M', i - killed)
+                testResultB = self.ReadMidi('B', i - killed)
                 if len(testResultM) < 8 or len(testResultB) < 8:
-                    #os.remove(self.MelodyPath[i])
-                    #os.remove(self.BassPath[i])
-                    self.MelodyPath.pop(i)
-                    self.BassPath.pop(i)
-                    print(testResultM)
-                    print('kill ' + self.MelodyPath[i])
-                    print('kill ' + self.BassPath[i])
+                    #os.remove(self.MelodyPath[i - killed])
+                    #os.remove(self.BassPath[i - killed])
+                    self.MelodyPath.pop(i - killed)
+                    self.BassPath.pop(i - killed)
+                    print(len(testResultM), len(testResultB))
+                    print('kill ' + self.MelodyPath[i - killed])
+                    print('kill ' + self.BassPath[i - killed])
+                    killed += 1
             except:
-                    #os.remove(self.MelodyPath[i])
-                    #os.remove(self.BassPath[i])
-                    self.MelodyPath.pop(i)
-                    self.BassPath.pop(i)
-                    print('kill ' + self.MelodyPath[i])
-                    print('kill ' + self.BassPath[i])
+                    #os.remove(self.MelodyPath[i - killed])
+                    #os.remove(self.BassPath[i - killed])
+                    self.MelodyPath.pop(i - killed)
+                    self.BassPath.pop(i - killed)
+                    print('kill ' + self.MelodyPath[i - killed])
+                    print('kill ' + self.BassPath[i - killed])
+                    killed += 1
 
     def MakeBatch(self, batchID):
         myBatchM = []
