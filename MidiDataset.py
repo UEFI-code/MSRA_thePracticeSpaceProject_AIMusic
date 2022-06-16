@@ -64,15 +64,17 @@ class midiData():
         myBatchM = []
         myBatchB = []
         batchID = int(batchID * len(self.MelodyPath) / self.batchsize)
+        #print(self.batchsize)
         for i in range(self.batchsize):
             tempID = (batchID + i) % len(self.MelodyPath)
-            myBatchM.append(self.ReadMidi('M', tempID))
-            myBatchB.append(self.ReadMidi('B', tempID))
+            myBatchM.append(self.ReadMidi('M', tempID)[0:8])
+            myBatchB.append(self.ReadMidi('B', tempID)[0:8])
+            #print(i) #Bug here
 
         return myBatchM, myBatchB
 
 
-Dataset = midiData('/hdd2/lmd/0-melody', '/hdd2/lmd/0-bass', 5)
+#Dataset = midiData('/hdd2/lmd/0-melody', '/hdd2/lmd/0-bass', 5)
 #Dataset.DataClean() #Don't Try this!
-sampleM, sampleB = Dataset.MakeBatch(0)
-print(sampleM)
+#sampleM, sampleB = Dataset.MakeBatch(0)
+#print(sampleM)
