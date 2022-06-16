@@ -42,9 +42,9 @@ class midiData():
             try:
                 testResultM = self.ReadMidi('M', i - killed)
                 testResultB = self.ReadMidi('B', i - killed)
-                if len(testResultM) < 8 or len(testResultB) < 8:
-                    #os.remove(self.MelodyPath[i - killed])
-                    #os.remove(self.BassPath[i - killed])
+                if len(testResultM) < 100 or len(testResultB) < 100:
+                    os.remove(self.MelodyPath[i - killed])
+                    os.remove(self.BassPath[i - killed])
                     self.MelodyPath.pop(i - killed)
                     self.BassPath.pop(i - killed)
                     print(len(testResultM), len(testResultB))
@@ -52,8 +52,8 @@ class midiData():
                     print('kill ' + self.BassPath[i - killed])
                     killed += 1
             except:
-                    #os.remove(self.MelodyPath[i - killed])
-                    #os.remove(self.BassPath[i - killed])
+                    os.remove(self.MelodyPath[i - killed])
+                    os.remove(self.BassPath[i - killed])
                     self.MelodyPath.pop(i - killed)
                     self.BassPath.pop(i - killed)
                     print('kill ' + self.MelodyPath[i - killed])
@@ -67,8 +67,8 @@ class midiData():
         #print(self.batchsize)
         for i in range(self.batchsize):
             tempID = (batchID + i) % len(self.MelodyPath)
-            myBatchM.append(self.ReadMidi('M', tempID)[0:8])
-            myBatchB.append(self.ReadMidi('B', tempID)[0:8])
+            myBatchM.append(self.ReadMidi('M', tempID)[0:100])
+            myBatchB.append(self.ReadMidi('B', tempID)[0:100])
             #print(i) #Bug here
 
         return myBatchM, myBatchB

@@ -26,7 +26,7 @@ for i in range(config.epoch):
         dataB = torch.tensor(dataB).float().cuda() / 128
         optimizer.zero_grad()
         y = myBPN(dataM.view(config.batchsize, -1))
-        y = y.view(config.batchsize, 8, 6)
+        y = y.view(config.batchsize, 100, 6)
         loss = myLoss(y, dataB)
         loss.backward()
         optimizer.step()
