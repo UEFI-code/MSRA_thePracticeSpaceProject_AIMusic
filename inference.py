@@ -28,5 +28,5 @@ myNet.load_state_dict(torch.load(config.pthsave))
 X = ReadMidi('tryM.midi')[0:100]
 X = numpy.array(X, dtype=object).astype(float)
 X = torch.tensor(X).float() / 128
-Y = myNet(X.view(1, 600)).view(100, 6).detach()
+Y = myNet(X.view(1, 600)).view(100, 6).detach() * 128
 WindUper.ArrayToMidi(Y, 'niceB.midi')
