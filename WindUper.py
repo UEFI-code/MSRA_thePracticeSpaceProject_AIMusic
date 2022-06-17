@@ -20,7 +20,7 @@ def ArrayToMidi(data, savepath):
         for j in range(3):
             pitch = int(i[j * 2])
             velocity = int(i[j * 2 + 1])
-            if pitch != 0 and velocity != 0:
+            if pitch in range(0,128) and velocity in range(0,128):
                 note = miditoolkit.midi.containers.Note(start=start, end=end, pitch=pitch, velocity=velocity)
                 mido_obj.instruments[0].notes.append(note)
         # prepare next
@@ -33,5 +33,5 @@ def ArrayToMidi(data, savepath):
     # write to file
     mido_obj.dump(savepath)
 
-sample = [[66,55,77,88,99,44], [77,88,66,99,99,100], [75,98,34,79,56,90]]
-ArrayToMidi(sample, '/tmp/test.midi')
+#sample = [[66,55,77,88,99,44], [77,88,66,99,99,100], [75,98,34,79,56,90]]
+#ArrayToMidi(sample, '/tmp/test.midi')

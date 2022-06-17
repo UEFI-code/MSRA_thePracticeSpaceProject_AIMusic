@@ -1,4 +1,5 @@
 import torch
+import torch.nn.functional as F
 import numpy
 import MidiDataset
 from config import Config as config
@@ -11,7 +12,9 @@ dataLen = len(Dataset.MelodyPath)
 
 batchNum = int(dataLen / config.batchsize)
 
-myLoss = torch.nn.L1Loss()
+def myLoss(y, t):
+    loss = F.cosine_similarity(y, t, 0).sum()
+    return loss
 
 myBPN = BPN.myBPN().cuda()
 
@@ -32,5 +35,7 @@ for i in range(config.epoch):
         optimizer.step()
         print('epoch %d batchID %d/%d loss %f' % (i, j, batchNum, loss))
     torch.save(myBPN.state_dict(), config.pthsave)
-    dump = y.cpu().detach() * 128
-    WindUper.ArrayToMidi(dump[0], config.midisave)
+    dumpY = y.cpu().detach() * 128
+    dumpM = dataM.cpu() * 128
+    WindUper.ArrayToMidi(dumpY[0], config.midisave + '/testY.midi')
+    WindUper.ArrayToMidi(dumpM[0], config.midisave + '/testM.midi')
