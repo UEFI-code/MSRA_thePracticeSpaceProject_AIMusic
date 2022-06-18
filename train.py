@@ -28,13 +28,13 @@ for i in range(config.epoch):
         dataM = torch.tensor(dataM).float().cuda() / 128
         dataB = torch.tensor(dataB).float().cuda() / 128
         optimizer.zero_grad()
-        y = myBPN(dataM.view(config.batchsize, -1))
-        y = y.view(config.batchsize, 100, 6)
+        y = myBPN(dataM)
         loss = myLoss(y, dataB)
         loss.backward()
         optimizer.step()
         print('epoch %d batchID %d/%d loss %f' % (i, j, batchNum, loss))
-    torch.save(myBPN.state_dict(), config.pthsave)
+    torch.save(myBPN.cpu().state_dict(), config.pthsave)
+    myBPN().cuda()
     dumpY = y.cpu().detach() * 128
     dumpM = dataM.cpu() * 128
     WindUper.ArrayToMidi(dumpY[0], config.midisave + '/testY.midi')

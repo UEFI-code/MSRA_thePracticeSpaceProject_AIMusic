@@ -5,12 +5,12 @@ import numpy
 import WindUper
 from config import Config as config
 
-def ReadMidi(midipath):
+def ReadMidi(midipath, track = 0):
     mido_obj = miditoolkit.midi.parser.MidiFile(midipath)
     NoteSet = []
     #lastEnd = mido_obj.instruments[0].notes[0].start #Bug bypass
     lastStart = -1
-    for i in mido_obj.instruments[0].notes:
+    for i in mido_obj.instruments[track].notes:
         if i.start != lastStart:
             #Atarashi Note
             lastStart = i.start
@@ -25,8 +25,10 @@ def ReadMidi(midipath):
 
 myNet = BPN.myBPN()
 myNet.load_state_dict(torch.load(config.pthsave))
-X = ReadMidi('tryM.midi')[0:100]
+X = [ReadMidi('tryM.midi', 0)[0:100]]
+WindUper.ArrayToMidi(X[0], 'niceM.midi')
 X = numpy.array(X, dtype=object).astype(float)
 X = torch.tensor(X).float() / 128
-Y = myNet(X.view(1, 600)).view(100, 6).detach() * 128
-WindUper.ArrayToMidi(Y, 'niceB.midi')
+Y = myNet(X).detach() * 128
+print(Y)
+WindUper.ArrayToMidi(Y[0], 'niceB.midi')

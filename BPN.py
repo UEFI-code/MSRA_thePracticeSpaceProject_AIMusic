@@ -11,6 +11,7 @@ class myBPN(torch.nn.Module):
         self.li4 = torch.nn.Linear(1024, 600)
 
     def forward(self, x):
+        x = x.view(x.size(0), -1)
         x = self.li1(x)
         x = self.relu(x)
         x = self.li2(x)
@@ -19,4 +20,5 @@ class myBPN(torch.nn.Module):
         x = self.relu(x)
         x = self.li4(x)
         x = self.relu(x)
+        x = x.view(x.size(0), 100, 6)
         return x
