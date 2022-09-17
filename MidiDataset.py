@@ -36,6 +36,13 @@ class midiData():
                     t = t + 2
         return NoteSet
     
+    def loadMidiToMemory(self):
+        self.MelodyData = []
+        self.BassData = []
+        for i in range(len(self.MelodyPath)):
+            self.MelodyData.append(self.ReadMidi('M', i))
+            self.BassData.append(self.ReadMidi('B', i))
+
     def DataClean(self):
         killed = 0
         for i in range(len(self.MelodyPath)):
@@ -71,6 +78,16 @@ class midiData():
 
         return myBatchM, myBatchB
 
+    def MakeBatchFromMemory(self, batchID):
+        myBatchM = []
+        myBatchB = []
+        batchID = int(batchID * len(self.MelodyPath) / self.batchsize)
+        for i in range(self.batchsize):
+            tempID = (batchID + i) % len(self.MelodyPath)
+            myBatchM.append(self.MelodyData[tempID])
+            myBatchB.append(self.BassData[tempID])
+
+        return myBatchM, myBatchB
 
 Dataset = midiData('/hdd2/lmd/0-melody', '/hdd2/lmd/0-bass', 5)
 #Dataset.DataClean() #Don't Try this!
